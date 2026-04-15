@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 224 71.4% 4.1%;
+  --primary: 262.1 83.3% 57.8%; /* Màu tím chủ đạo */
+  --primary-foreground: 210 20% 98%;
+}
+
+body {
+  background-color: #fdfcff; /* Nền trắng ánh tím cực nhẹ */
+  color: #1a1a1a;
+}
+
+/* Custom class cho cột Kanban */
+.kanban-column {
+  @apply flex flex-col rounded-xl border bg-[#f1f5f9] p-4;
+  /* Chiều cao tối thiểu lớn để cột luôn dài đều nhau */
+  min-height: 75vh; 
+  height: fit-content;
+}
+
+.task-list-container {
+  @apply flex-grow mt-2;
+  /* Nếu có quá nhiều task, nó sẽ dài ra thay vì tràn */
+  min-height: 300px; 
+}
