@@ -29,57 +29,75 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, onA
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px] rounded-2xl">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold">Thêm nhiệm vụ mới</DialogTitle>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-6 py-4">
-          <div className="space-y-2">
-            <Label htmlFor="title" className="text-sm font-semibold">Tiêu đề</Label>
-            <Input
-              id="title"
-              placeholder="Nhập tiêu đề nhiệm vụ..."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="rounded-xl bg-secondary/30 border-none focus-visible:ring-1"
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="description" className="text-sm font-semibold">Mô tả</Label>
-            <Textarea
-              id="description"
-              placeholder="Nhập mô tả chi tiết..."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="rounded-xl bg-secondary/30 border-none focus-visible:ring-1 min-h-[100px]"
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="priority" className="text-sm font-semibold">Mức độ ưu tiên</Label>
-            <Select value={priority} onValueChange={(value: any) => setPriority(value)}>
-              <SelectTrigger className="rounded-xl bg-secondary/30 border-none focus-visible:ring-1">
-                <SelectValue placeholder="Chọn mức độ ưu tiên" />
-              </SelectTrigger>
-              <SelectContent className="rounded-xl">
-                <SelectItem value="low">Thấp</SelectItem>
-                <SelectItem value="medium">Trung bình</SelectItem>
-                <SelectItem value="high">Cao</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <DialogFooter className="pt-4">
-            <Button type="button" variant="ghost" onClick={onClose} className="rounded-xl">
-              Hủy
-            </Button>
-            <Button type="submit" className="rounded-xl px-8 gap-2">
-              <Plus className="h-4 w-4" />
-              Thêm nhiệm vụ
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+  <Dialog open={isOpen} onOpenChange={onClose}>
+    <DialogContent 
+      style={{ 
+        backgroundColor: 'white', 
+        padding: '24px', 
+        borderRadius: '16px', 
+        maxWidth: '450px', 
+        width: '90%',
+        boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' 
+      }}
+    >
+      <DialogHeader>
+        <DialogTitle style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '16px', display: 'block' }}>
+          Thêm nhiệm vụ mới
+        </DialogTitle>
+      </DialogHeader>
+
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <label style={{ fontWeight: '600', fontSize: '14px' }}>Tiêu đề</label>
+          <input
+            style={{ padding: '10px', borderRadius: '8px', border: '1px solid #ccc', width: '100%' }}
+            placeholder="Nhập tiêu đề..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <label style={{ fontWeight: '600', fontSize: '14px' }}>Mô tả</label>
+          <textarea
+            style={{ padding: '10px', borderRadius: '8px', border: '1px solid #ccc', minHeight: '80px', width: '100%' }}
+            placeholder="Nhập mô tả..."
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <label style={{ fontWeight: '600', fontSize: '14px' }}>Mức độ ưu tiên</label>
+          <select 
+            value={priority} 
+            onChange={(e) => setPriority(e.target.value as any)}
+            style={{ padding: '10px', borderRadius: '8px', border: '1px solid #ccc', backgroundColor: 'white', width: '100%' }}
+          >
+            <option value="low">Thấp</option>
+            <option value="medium">Trung bình</option>
+            <option value="high">Cao</option>
+          </select>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px' }}>
+          <button 
+            type="button" 
+            onClick={onClose}
+            style={{ padding: '8px 16px', borderRadius: '8px', border: 'none', cursor: 'pointer', background: '#f1f5f9' }}
+          >
+            Hủy
+          </button>
+          <button 
+            type="submit"
+            style={{ padding: '8px 24px', borderRadius: '8px', border: 'none', cursor: 'pointer', background: '#3b82f6', color: 'white', fontWeight: 'bold' }}
+          >
+            Thêm nhiệm vụ
+          </button>
+        </div>
+      </form>
+    </DialogContent>
+  </Dialog>
   );
 };
