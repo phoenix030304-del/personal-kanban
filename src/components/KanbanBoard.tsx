@@ -285,17 +285,17 @@ const handleAddTask = async (taskData: any) => {
       </div>
 
       {/* Board */}
-      <main className="flex-1 container mx-auto px-6 py-8 overflow-x-auto">
+      <main className="flex-1 w-full px-6 py-8 overflow-x-auto flex justify-center">
         {loading ? (
-          <div className="flex items-center justify-center h-64">
+          <div className="flex flex-row gap-6 w-full max-w-7xl items-start">
             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="flex gap-6 h-full min-w-max pb-4">
-              {data.columnOrder.map((columnId: string) => {
-                const column = data.columns[columnId];
-                const tasks = column.taskIds.map((taskId: string) => data.tasks[taskId]);
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl min-h-[70vh] items-start pb-4">
+        {data.columnOrder.map((columnId: string) => {
+          const column = data.columns[columnId];
+          const tasks = column.taskIds.map((taskId: string) => data.tasks[taskId]);
 
                 return (
                   <KanbanColumn
