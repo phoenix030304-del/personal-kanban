@@ -285,32 +285,35 @@ const handleAddTask = async (taskData: any) => {
       </div>
 
       {/* Board */}
-      <main className="flex-1 w-full px-6 py-8 overflow-x-auto flex justify-center">
+      <main className="flex-1 w-full px-4 py-8 overflow-x-auto flex justify-center bg-slate-50">
         {loading ? (
-          <div className="flex flex-row gap-6 w-full max-w-7xl items-start">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
+          <div className="flex items-center justify-center w-full h-64">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-600"></div>
           </div>
         ) : (
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl min-h-[70vh] items-start pb-4">
-        {data.columnOrder.map((columnId: string) => {
-          const column = data.columns[columnId];
-          const tasks = column.taskIds.map((taskId: string) => data.tasks[taskId]);
+            {/* THAY ĐỔI TẠI ĐÂY: Dùng flex-row thay cho grid */}
+            <div className="flex flex-row items-start gap-6 w-full max-w-7xl min-h-[75vh] pb-8">
+              {data.columnOrder.map((columnId: string) => {
+                const column = data.columns[columnId];
+                const tasks = column.taskIds.map((taskId: string) => data.tasks[taskId]);
 
                 return (
-                  <KanbanColumn
-                    key={column.id}
-                    column={column}
-                    tasks={tasks}
-                    onDeleteTask={handleDeleteTask}
-                    onMoveTask={handleMoveTask}
-                  />
+                  /* Bọc mỗi Column vào một div có độ rộng cố định */
+                  <div key={column.id} className="flex-1 min-w-[300px] max-w-[400px]">
+                    <KanbanColumn
+                      column={column}
+                      tasks={tasks}
+                      onDeleteTask={handleDeleteTask}
+                      onMoveTask={handleMoveTask}
+                    />
+                  </div>
                 );
               })}
             </div>
           </DragDropContext>
         )}
-      </main>
+</main>
 
       {/* Floating Action Button */}
       <Button 
